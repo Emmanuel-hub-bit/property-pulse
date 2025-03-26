@@ -94,7 +94,7 @@ const Navbar = () => {
           <div
             className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0"
           >
-            <a href="messages.html" className="relative group">
+            <Link href="/messages" className="relative group">
               <button
                 type="button"
                 className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -152,22 +152,24 @@ const Navbar = () => {
                 aria-labelledby="user-menu-button"
                 tabIndex="-1"
               >
-                <a
-                  href="/profile.html"
+                <Link
+                  href="/profile"
                   className="block px-4 py-2 text-sm text-gray-700"
                   role="menuitem"
                   tabIndex="-1"
                   id="user-menu-item-0"
-                  >Your Profile</a
                 >
-                <a
-                  href="/saved-properties.html"
+                  Your Profile
+                </Link>
+                <Link
+                  href="/properties/saved"
                   className="block px-4 py-2 text-sm text-gray-700"
                   role="menuitem"
                   tabIndex="-1"
                   id="user-menu-item-2"
-                  >Saved Properties</a
                 >
+                  Saved Properties
+                </Link>
                 <button
                   className="block px-4 py-2 text-sm text-gray-700"
                   role="menuitem"
@@ -186,20 +188,23 @@ const Navbar = () => {
       <div className="hidden" id="mobile-menu">
         <div className="space-y-1 px-2 pb-3 pt-2">
           <Link
-            href="/index.html"
+            href="/"
             className="bg-black text-white block rounded-md px-3 py-2 text-base font-medium"
-            >Home</Link
           >
-          <a
-            href="/properties.html"
+            Home
+          </Link>
+          <Link
+            href="/properties"
             className="text-white block rounded-md px-3 py-2 text-base font-medium"
-            >Properties</a
           >
-          <a
-            href="/add-property.html"
+            Properties
+          </Link>
+          <Link
+            href="/properties/add"
             className="text-white block rounded-md px-3 py-2 text-base font-medium"
-            >Add Property</a
           >
+            Add Property
+          </Link>
           <button
             className="flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2 my-5"
           >
