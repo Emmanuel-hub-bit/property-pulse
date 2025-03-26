@@ -40,7 +40,7 @@ const Navbar = () => {
             className="flex flex-1 items-center justify-center md:items-stretch md:justify-start"
           >
             {/* <!-- Logo --> */}
-            <Link className="flex flex-shrink-0 items-center" href="/index.html">
+            <Link className="flex flex-shrink-0 items-center" href="/">
               <Image
                 className="h-10 w-auto"
                 src= { logo }
@@ -57,20 +57,23 @@ const Navbar = () => {
             <div className="hidden md:ml-6 md:block">
               <div className="flex space-x-2">
                 <Link
-                  href="/index.html"
+                  href="/"
                   className="text-white bg-black hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
-                  >Home</Link
                 >
-                <a
-                  href="/properties.html"
+                  Home
+                </Link>
+                <Link
+                  href="/properties"
                   className="text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
-                  >Properties</a
                 >
-                <a
-                  href="/add-property.html"
+                  Properties
+                </Link>
+                <Link
+                  href="/properties/add"
                   className="text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
-                  >Add Property</a
                 >
+                  Add Property
+                </Link>
               </div>
             </div>
           </div>
