@@ -1,9 +1,19 @@
+'use client';
+import { useState } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../assets/images/logo-white.png";
 import profileDefault from "../assets/images/profile.png";
+import { FaGoogle } from 'react-icons/fa';
+
 
 const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  // const [isLogin, setIsLogin] = useState(false);
+  // const [isProfile, setIsProfile] = useState(false);
+
+
   return (
     <nav className="bg-blue-700 border-b border-blue-500">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -16,6 +26,7 @@ const Navbar = () => {
               className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               aria-controls="mobile-menu"
               aria-expanded="false"
+              onClick={ () => setIsMobileMenuOpen((prev) => !prev) }
             >
               <span className="absolute -inset-0.5"></span>
               <span className="sr-only">Open main menu</span>
@@ -84,7 +95,7 @@ const Navbar = () => {
               <button
                 className="flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
               >
-                <i className="fa-brands fa-google text-white mr-2"></i>
+                <FaGoogle className="text-white mr-2" />
                 <span>Login or Register</span>
               </button>
             </div>
@@ -122,7 +133,7 @@ const Navbar = () => {
                 2
                 {/* <!-- Replace with the actual number of notifications --> */}
               </span>
-            </a>
+            </Link>
             {/* <!-- Profile dropdown button --> */}
             <div className="relative ml-3">
               <div>
@@ -185,7 +196,7 @@ const Navbar = () => {
       </div>
 
       {/* <!-- Mobile menu, show/hide based on menu state. --> */}
-      <div className="hidden" id="mobile-menu">
+      <div id="mobile-menu">
         <div className="space-y-1 px-2 pb-3 pt-2">
           <Link
             href="/"
