@@ -11,7 +11,7 @@ import { FaGoogle } from 'react-icons/fa';
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   // const [isLogin, setIsLogin] = useState(false);
-  // const [isProfile, setIsProfile] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
 
   return (
@@ -143,6 +143,7 @@ const Navbar = () => {
                   id="user-menu-button"
                   aria-expanded="false"
                   aria-haspopup="true"
+                  onClick={ () => setIsProfileMenuOpen(( prev) => !prev) }
                 >
                   <span className="absolute -inset-1.5"></span>
                   <span className="sr-only">Open user menu</span>
@@ -155,9 +156,11 @@ const Navbar = () => {
               </div>
 
               {/* <!-- Profile dropdown --> */}
+              {
+                isProfileMenuOpen && (
               <div
                 id="user-menu"
-                className="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="user-menu-button"
@@ -190,12 +193,15 @@ const Navbar = () => {
                   Sign Out
                 </button>
               </div>
+              )}
             </div>
           </div>
         </div>
       </div>
 
       {/* <!-- Mobile menu, show/hide based on menu state. --> */}
+      {
+        isMobileMenuOpen && (
       <div id="mobile-menu">
         <div className="space-y-1 px-2 pb-3 pt-2">
           <Link
@@ -224,6 +230,7 @@ const Navbar = () => {
           </button>
         </div>
       </div>
+      )}
     </nav>
   );
 };
