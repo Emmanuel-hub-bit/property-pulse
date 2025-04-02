@@ -1,16 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaBed, FaBath, FaRulerCombined, FaMoneyBill, FaMapMarker } from "react-icons/fa";
+import { 
+    FaBed,
+    FaBath, 
+    FaRulerCombined, 
+    FaMoneyBill, 
+    FaMapMarker 
+} from "react-icons/fa";
 
 const PropertyCard = ({ property }) => {
     return (
-    <>
         <div className="rounded-xl shadow-md relative">
                 <Image
-                src="/public/images/properties/a1.jpg"
-                alt=""
-                width={300}
-                height={200}
+                src="/images/properties/a1.jpg"
+                alt="Property Image"
+                width={100}
+                height={50}
                 className="w-full h-auto rounded-t-xl"
                 />
                 <div className="p-4">
@@ -26,15 +31,18 @@ const PropertyCard = ({ property }) => {
 
                 <div className="flex justify-center gap-4 text-gray-500 mb-4">
                     <p>
-                    <i className="fa-solid fa-bed"></i> 3
+                    {/* <i className="fa-solid fa-bed"></i> 3 */}
+                    <FaBed /> 3 <span className="md:hidden lg:inline">Beds</span>
                     <span className="md:hidden lg:inline">Beds</span>
                     </p>
                     <p>
-                    <i className="fa-solid fa-bath"></i> 2
+                    {/* <i className="fa-solid fa-bath"></i> 2 */}
+                    <FaBed /> 3 <span className="md:hidden lg:inline">Beds</span>
                     <span className="md:hidden lg:inline">Baths</span>
                     </p>
                     <p>
-                    <i className="fa-solid fa-ruler-combined"></i>
+                    {/* <i className="fa-solid fa-ruler-combined"></i> */}
+                    <FaBed /> 3 <span className="md:hidden lg:inline">Beds</span>
                     1,500 <span className="md:hidden lg:inline">sqft</span>
                     </p>
                 </div>
@@ -55,16 +63,15 @@ const PropertyCard = ({ property }) => {
                     ></i>
                     <span className="text-orange-700"> Boston MA </span>
                     </div>
-                    <a
+                    <Link
                     href="property.html"
                     className="h-[36px] bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-center text-sm"
                     >
                     Details
-                    </a>
+                    </Link>
                 </div>
                 </div>
             </div>
-    </>
     );
 }
  
