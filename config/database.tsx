@@ -22,31 +22,67 @@
 
 // export default connectDB;
 
-// mongodb+srv://onyangoemmanuel14:emmanuel333@cluster0.rwzw6cq.mongodb.net/propertypulse?authSource=admin
+// import mongoose from "mongoose";
 
+// const connectDB = async () => {
+//   const uri = process.env.MONGODB_URI;
+
+//   if (!uri) {
+//     throw new Error("MONGODB_URI is not defined in .env");
+//   }
+
+//   // Check if already connected to MongoDB
+//   if (mongoose.connection.readyState === 1) {
+//     console.log("MongoDB is already connected");
+//     return;
+//   }
+
+//   // Connect to MongoDB
+//   try {
+//     await mongoose.connect(uri);
+//     console.log("MongoDB connected successfully");
+//   } catch (error) {
+//     console.error("Error connecting to MongoDB:", error);
+//     // process.exit(1); // Optionally exit the process
+//   }
+// };
+
+// export default connectDB;
+
+// lib/mongoose.ts
 import mongoose from "mongoose";
 
-const connectDB = async () => {
-  const uri = process.env.MONGODB_URI;
+declare global {
+  var mongoose: any;
+}
 
-  if (!uri) {
-    throw new Error("MONGODB_URI is not defined in .env");
+const MONGODB_URI = process.env.MONGODB_URI;
+
+if (!MONGODB_URI) {
+  throw new Error("Please define the MONGODB_URI in your .env file");
+}
+
+let cached = global.mongoose || { conn: null, promise: null };
+
+async function dbConnect() {
+  if (cached.conn) {
+    return cached.conn;
   }
 
-  // Check if already connected to MongoDB
-  if (mongoose.connection.readyState === 1) {
-    console.log("MongoDB is already connected");
-    return;
+  if (!cached.promise) {
+    cached.promise = mongoose
+      .connect(MONGODB_URI, {
+        bufferCommands: false,
+      })
+      .then((mongoose) => {
+        return mongoose;
+      });
   }
 
-  // Connect to MongoDB
-  try {
-    await mongoose.connect(uri);
-    console.log("MongoDB connected successfully");
-  } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
-    // process.exit(1); // Optionally exit the process
-  }
-};
+  cached.conn = await cached.promise;
+  return cached.conn;
+}
 
-export default connectDB;
+global.mongoose = cached;
+
+export default dbConnect;
