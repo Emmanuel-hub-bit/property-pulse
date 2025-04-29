@@ -50,6 +50,7 @@
 // export default connectDB;
 
 // lib/mongoose.ts
+
 import mongoose from "mongoose";
 
 declare global {
@@ -86,3 +87,47 @@ async function dbConnect() {
 global.mongoose = cached;
 
 export default dbConnect;
+
+
+// import mongoose from "mongoose";
+
+// declare global {
+//   var mongoose: {
+//     conn: typeof mongoose | null;
+//     promise: Promise<typeof mongoose> | null;
+//   };
+// }
+
+// const MONGODB_URI = process.env.MONGODB_URI;
+
+// if (!MONGODB_URI) {
+//   throw new Error("Please define the MONGODB_URI in your .env file");
+// }
+
+// let cached = global.mongoose || { conn: null, promise: null };
+
+// async function dbConnect(): Promise<typeof mongoose> {
+//   if (cached.conn) {
+//     return cached.conn;
+//   }
+
+//   if (!cached.promise) {
+//     // 👇 Enable debug mode for Mongoose
+//     mongoose.set("debug", true);
+
+//     // 👇 Force dbName and a 5 second server selection timeout
+//     cached.promise = mongoose.connect(MONGODB_URI, {
+//       dbName: "propertypulse",
+//       serverSelectionTimeoutMS: 5000,
+//       bufferCommands: false,
+//     });
+//   }
+
+//   cached.conn = await cached.promise;
+//   return cached.conn;
+// }
+
+// global.mongoose = cached;
+
+// export default dbConnect;
+
