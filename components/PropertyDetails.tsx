@@ -62,16 +62,16 @@ const PropertyDetails = ({ property }) => {
         <h3 className="text-lg font-bold mb-6">Description & Details</h3>
         <div className="flex justify-center gap-4 text-blue-500 mb-4 text-xl space-x-9">
           <p>
-            <FaBed className="inline-block mr-2" /> {property.beds}
+            <FaBed className="inline-block mr-2" /> {property.beds} {""}
             <span className="hidden sm:inline">Beds</span>
           </p>
           <p>
-            <i className="fa-solid fa-bath"></i> {property.baths}
+            <FaBath className="inline-block mr-2" /> {property.baths} {""}
             <span className="hidden sm:inline">Baths</span>
           </p>
           <p>
-            <i className="fa-solid fa-ruler-combined"></i>
-            {property.square_feet}
+            <FaRulerCombined className="inline-block mr-2" />
+            {property.square_feet} {""}
             <span className="hidden sm:inline">sqft</span>
           </p>
         </div>
@@ -84,8 +84,7 @@ const PropertyDetails = ({ property }) => {
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 list-none">
           {property.amenities.map((amenity, index) => (
             <li key={index}>
-              <i className="fas fa-check text-green-600 mr-2 mt-3"></i>{" "}
-              {amenity}
+              <FaCheck className="inline-block text-green-600 mr-2" /> {amenity}
             </li>
           ))}
         </ul>
