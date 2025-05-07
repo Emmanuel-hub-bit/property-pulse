@@ -38,7 +38,7 @@ export const dynamic = "force-dynamic"; // Ensure it's dynamically rendered
 const PropertyPage = async (props: any) => {
   await dbConnect();
 
-  const params = await props.params; // 👈 This is the key fix
+  const params = await props.params;
 
   const property = await Property.findById(params.id).lean();
 

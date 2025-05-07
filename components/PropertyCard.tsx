@@ -50,7 +50,7 @@ const PropertyCard = ({ property }) => {
           </p>
           <p>
             <FaRulerCombined className="md:hidden lg:inline" />{" "}
-            {property.square_feet} 1,500{" "}
+            {property.square_feet}{" "}
             <span className="md:hidden lg:inline">sqft</span>
           </p>
         </div>
