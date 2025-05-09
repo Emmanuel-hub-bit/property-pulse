@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 import cloudinary from "../../../config/cloudinary";
 
 async function addProperty(formData) {
+    // const amenities = formData.getAll('amenities');
     await dbConnect();
 
     const sessionUser = await getSessionUser();
@@ -16,13 +17,11 @@ async function addProperty(formData) {
 
     const { userId } = sessionUser;
 
-
-
-    // access all values from amenities and images
+    // // access all values from amenities and images
     const amenities = formData.getAll('amenities');
     const images = formData
         .getAll('images')
-        .filter((image) => image.name !== '')
+        .filter((image) => image.name !== '');
     
     const propertyData = {
         owner: userId,
@@ -38,41 +37,40 @@ async function addProperty(formData) {
         beds: formData.get('beds'),
         baths: formData.get('baths'),
         square_feet: formData.get('square_feet'),
-        amenities,
+        amenities: formData.getAll('amenities'),
         rates: {
             nightly: formData.get('rates.nightly'),
             weekly: formData.get('rates.weekly'),
             monthly: formData.get('rates.monthly'),
-            
         },
         seller_info: {
             name: formData.get('seller_info.name'),
             email: formData.get('seller_info.email'),
             phone: formData.get('seller_info.phone'),
         },
+       
     };
 
-    const imageUrls = []
+    // console.log(propertyData);
+
+    const imageUrls = [];
     for (const imageFile of images) {
         const imageBuffer = await imageFile.arrayBuffer();
         const imageArray = Array.from(new Uint8Array(imageBuffer));
         const imageData = Buffer.from(imageArray);
 
+    //     // convert into base 64
+        const imageBase64 = imageData.toString('base64');
 
-        // convert into base 64
-        const base64String = imageData.toString('base64');
-
-        // make request to cloudinary
-        const cloudinaryResponse = await cloudinary.uploader.upload(
-            `data:image/png;base64,${base64String}`, 
+    //     // make request to cloudinary
+        const result = await cloudinary.uploader.upload(
+            `data:image/png;base64,${imageBase64}`, 
             {
-                upload_folder: 'propertypulse',
+                folder: 'propertypulse',
             }
         );
 
-
-        imageUrls.push(cloudinaryResponse.secure_url);
-
+        imageUrls.push(result.secure_url);
     }
     propertyData.images = imageUrls;
 
