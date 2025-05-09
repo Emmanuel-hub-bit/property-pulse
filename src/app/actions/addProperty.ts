@@ -54,24 +54,37 @@ async function addProperty(formData) {
     // console.log(propertyData);
 
     const imageUrls = [];
-    for (const imageFile of images) {
-        const imageBuffer = await imageFile.arrayBuffer();
-        const imageArray = Array.from(new Uint8Array(imageBuffer));
-        const imageData = Buffer.from(imageArray);
+    try {
+        for (const imageFile of images) {
+            const imageBuffer = await imageFile.arrayBuffer();
+            const imageArray = Array.from(new Uint8Array(imageBuffer));
+            const imageData = Buffer.from(imageArray);
 
-    //     // convert into base 64
-        const imageBase64 = imageData.toString('base64');
+        //     // convert into base 64
+            const imageBase64 = imageData.toString('base64');
 
-    //     // make request to cloudinary
-        const result = await cloudinary.uploader.upload(
-            `data:image/png;base64,${imageBase64}`, 
-            {
-                folder: 'propertypulse',
+        //     // make request to cloudinary
+            const result = await cloudinary.uploader.upload(
+                `data:image/png;base64,${imageBase64}`, 
+                {
+                    folder: 'propertypulse',
+                }
+            );
+            if (!result.secure_url) {
+                throw new Error('Cloudinary upload failed');
             }
-        );
 
-        imageUrls.push(result.secure_url);
-    }
+            imageUrls.push(result.secure_url);
+        }
+    } catch (error) {
+        console.error('Image upload error:', error);
+        throw new Error('Image upload failed. Please try again.');
+      }
+      
+      // Ensure at least one image was uploaded
+      if (imageUrls.length === 0) {
+        throw new Error('At least one image is required');
+      }
     propertyData.images = imageUrls;
 
     const newProperty = new Property(propertyData);

@@ -22,39 +22,29 @@ const PropertyCard = ({ property }) => {
 
   return (
     <div className="rounded-xl shadow-md relative">
-      {/* {property.images[0] ? (
-        <Image
-          src={property.images[0]}
-          alt="Property image"
-          width={0}
-          height={0}
-          sizes="100vw"
-          className="w-full h-auto rounded-t-xl"
-        />
-      ) : null} */}
-
-      <Image
+      {/* <Image
         src={property.images[0]}
-        alt=""
+        alt={property.title}
         width="0"
         height="0"
         sizes="100vw"
         className="w-full h-auto rounded-t-xl"
-      />
-      {/* {property.images?.[0] ? (
+      /> */}
+      {property?.images?.length > 0 ? (
         <Image
           src={property.images[0]}
-          alt="Property Image"
-          width={0}
-          height={0}
+          alt={property.name || "Property image"}
+          width="0"
+          height="0"
           sizes="100vw"
           className="w-full h-auto rounded-t-xl"
+          priority={false}
         />
       ) : (
-        <div className="w-full h-[200px] bg-gray-200 flex items-center justify-center rounded-t-xl">
-          <span className="text-gray-500">No Image</span>
+        <div className="w-full h-48 bg-gray-200 rounded-t-xl flex items-center justify-center">
+          <span className="text-gray-500">No Image Available</span>
         </div>
-      )} */}
+      )}
 
       <div className="p-4">
         <div className="text-left md:text-center lg:text-left mb-6">
