@@ -1,32 +1,6 @@
-// import PropertyHeaderImage from "../../../../components/PropertyHeaderImage";
-// import dbConnect from "../../../../config/database";
-// import Property from "../../../../models/Property";
-// import { notFound } from "next/navigation";
-
-// // 👇 Tell Next.js this must be rendered dynamically (fixes the error)
-// export const dynamic = "force-dynamic";
-
-// const PropertyPage = async ({ params }: { params: { id: string } }) => {
-//   await dbConnect();
-
-//   const property = await Property.findById(params.id).lean();
-
-//   if (!property) {
-//     notFound();
-//   }
-
-//   return (
-//     <>
-//       <PropertyHeaderImage image={property.images[0]} />
-//       <section>{property.name}</section>
-//     </>
-//   );
-// };
-
-// export default PropertyPage;
-
 import PropertyHeaderImage from "../../../../components/PropertyHeaderImage";
 import PropertyDetails from "../../../../components/PropertyDetails";
+import PropertyImages from "../../../../components/PropertyImages";
 import dbConnect from "../../../../config/database";
 import Property from "../../../../models/Property";
 import { notFound } from "next/navigation";
@@ -48,7 +22,7 @@ const PropertyPage = async (props: any) => {
 
   return (
     <>
-      <PropertyHeaderImage image={property.images[0]} />
+      <PropertyHeaderImage image={property.images[0][0]} />
       <section>
         <div className="container m-auto py-6 px-6">
           <Link
@@ -66,6 +40,7 @@ const PropertyPage = async (props: any) => {
           </div>
         </div>
       </section>
+      <PropertyImages images={property.images} />
     </>
   );
 };

@@ -7,7 +7,6 @@ import { redirect } from "next/navigation";
 import cloudinary from "../../../config/cloudinary";
 
 async function addProperty(formData) {
-    // const amenities = formData.getAll('amenities');
     await dbConnect();
 
     const sessionUser = await getSessionUser();
@@ -18,10 +17,16 @@ async function addProperty(formData) {
     const { userId } = sessionUser;
 
     // // access all values from amenities and images
-    const amenities = formData.getAll('amenities');
+    // const amenities = formData.getAll('amenities');
+    let amenities = formData.getAll('amenities');
+
+    amenities = amenities.flat().map(item => item.trim());
+
+
     const images = formData
         .getAll('images')
         .filter((image) => image.name !== '');
+
     
     const propertyData = {
         owner: userId,
@@ -37,7 +42,7 @@ async function addProperty(formData) {
         beds: formData.get('beds'),
         baths: formData.get('baths'),
         square_feet: formData.get('square_feet'),
-        amenities: formData.getAll('amenities'),
+        amenities,
         rates: {
             nightly: formData.get('rates.nightly'),
             weekly: formData.get('rates.weekly'),
@@ -51,10 +56,7 @@ async function addProperty(formData) {
        
     };
 
-    // console.log(propertyData);
-
     const imageUrls = [];
-    try {
         for (const imageFile of images) {
             const imageBuffer = await imageFile.arrayBuffer();
             const imageArray = Array.from(new Uint8Array(imageBuffer));
@@ -75,17 +77,15 @@ async function addProperty(formData) {
             }
 
             imageUrls.push(result.secure_url);
+
         }
-    } catch (error) {
-        console.error('Image upload error:', error);
-        throw new Error('Image upload failed. Please try again.');
-      }
       
       // Ensure at least one image was uploaded
       if (imageUrls.length === 0) {
         throw new Error('At least one image is required');
       }
     propertyData.images = imageUrls;
+    
 
     const newProperty = new Property(propertyData);
     await newProperty.save();

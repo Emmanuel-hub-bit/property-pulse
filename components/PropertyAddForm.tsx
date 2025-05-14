@@ -237,6 +237,18 @@ const PropertyAddForm = () => {
           <div>
             <input
               type="checkbox"
+              id="amenity_high-speed_internet"
+              name="amenities"
+              value="High-Speed Internet"
+              className="mr-2"
+            />
+            <label htmlFor="amenity_high-speed_internet">
+              High-Speed Internet
+            </label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
               id="amenity_gym_fitness_center"
               name="amenities"
               value="Gym/Fitness Center"
@@ -279,6 +291,70 @@ const PropertyAddForm = () => {
           <div>
             <input
               type="checkbox"
+              id="amenity_fire_place"
+              name="amenities"
+              value="Fireplace"
+              className="mr-2"
+            />
+            <label htmlFor="amenity_fire_place">Fireplace</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="amenity_ski_equipment_storage"
+              name="amenities"
+              value="Ski Equipment Storage"
+              className="mr-2"
+            />
+            <label htmlFor="amenity_ski_equipment_storage">
+              Ski Equipment Storage
+            </label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="amenity_pet-friendly"
+              name="amenities"
+              value="Pet-Friendly"
+              className="mr-2"
+            />
+            <label htmlFor="amenity_pet_friendly">Pet-Friendly</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="amenity_hiking_trails_access"
+              name="amenities"
+              value="Hiking Trails Access"
+              className="mr-2"
+            />
+            <label htmlFor="amenity_hiking_trails_access">
+              Hiking Trails Access
+            </label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="amenity_beach_access"
+              name="amenities"
+              value="Beach Access"
+              className="mr-2"
+            />
+            <label htmlFor="amenity_beach_access">Beach Access</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="amenity_outdoor_gill/bbq"
+              name="amenities"
+              value="Outdoor Grill/BBQ"
+              className="mr-2"
+            />
+            <label htmlFor="amenity_outdoor_grill/bbq">Outdoor Grill/BBQ</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
               id="amenity_coffee_maker"
               name="amenities"
               value="Coffee Maker"
@@ -294,6 +370,17 @@ const PropertyAddForm = () => {
           Rates (Leave blank if not applicable)
         </label>
         <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
+          <div className="flex items-center">
+            <label htmlFor="nightly_rate" className="mr-2">
+              Nightly
+            </label>
+            <input
+              type="number"
+              id="nightly_rate"
+              name="rates.nightly"
+              className="border rounded w-full py-2 px-3"
+            />
+          </div>
           <div className="flex items-center">
             <label htmlFor="weekly_rate" className="mr-2">
               Weekly
@@ -313,17 +400,6 @@ const PropertyAddForm = () => {
               type="number"
               id="monthly_rate"
               name="rates.monthly"
-              className="border rounded w-full py-2 px-3"
-            />
-          </div>
-          <div className="flex items-center">
-            <label htmlFor="nightly_rate" className="mr-2">
-              Nightly
-            </label>
-            <input
-              type="number"
-              id="nightly_rate"
-              name="rates.nightly"
               className="border rounded w-full py-2 px-3"
             />
           </div>
