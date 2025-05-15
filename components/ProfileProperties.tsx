@@ -8,7 +8,7 @@ const ProfileProperties = ({ properties: initialProperties }) => {
 
   return properties.map((property) => (
     <div key={property._id} className="mb-10">
-      <Link href="/property.html">
+      <Link href={`/properties/${property._id}`}>
         <Image
           className="h-32 w-full rounded-md object-cover"
           src={property.images[0][0]}

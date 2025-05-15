@@ -6,6 +6,7 @@ import Property from "../../../../models/Property";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
+import { covertToSerializableObject } from "../../../../utils/convertToObject";
 
 export const dynamic = "force-dynamic"; // Ensure it's dynamically rendered
 
@@ -14,10 +15,16 @@ const PropertyPage = async (props: any) => {
 
   const params = await props.params;
 
-  const property = await Property.findById(params.id).lean();
+  const propertyDoc = await Property.findById(params.id).lean();
+
+  const property = covertToSerializableObject(propertyDoc);
 
   if (!property) {
-    notFound();
+    return (
+      <h1 className="text-center text-2xl font-bold mt-10">
+        Property Not Found
+      </h1>
+    );
   }
 
   return (
