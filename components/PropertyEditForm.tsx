@@ -1,10 +1,14 @@
+import updateProperty from "@/app/actions/updateProperty";
+
 const PropertyEditForm = ({ property }) => {
+  const updatePropertyById = updateProperty.bind(null, property._id);
+
   const amenities: string[] = Array.isArray(property.amenities)
     ? property.amenities.flat()
     : [];
 
   return (
-    <form>
+    <form action={updatePropertyById}>
       <h2 className="text-3xl text-center font-semibold mb-6">Edit Property</h2>
 
       <div className="mb-4">
@@ -496,7 +500,7 @@ const PropertyEditForm = ({ property }) => {
         />
       </div>
 
-      <div className="mb-4">
+      {/* <div className="mb-4">
         <label htmlFor="images" className="block text-gray-700 font-bold mb-2">
           Images (Select up to 4 images)
         </label>
@@ -509,7 +513,7 @@ const PropertyEditForm = ({ property }) => {
           multiple
           required
         />
-      </div>
+      </div> */}
 
       <div>
         <button

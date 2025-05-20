@@ -20,7 +20,7 @@ const PropertyDetails = ({ property }) => {
   }
 
   return (
-    <main>
+    <main className="w-full">
       <div className="bg-white p-6 rounded-lg shadow-md text-center md:text-left">
         <div className="text-gray-500 mb-4">{property.type}</div>
         <h1 className="text-3xl font-bold mb-4">{property.name}</h1>

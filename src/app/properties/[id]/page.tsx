@@ -1,22 +1,19 @@
 import PropertyHeaderImage from "../../../../components/PropertyHeaderImage";
 import PropertyDetails from "../../../../components/PropertyDetails";
 import PropertyImages from "../../../../components/PropertyImages";
+import BookmarkButton from "../../../../components/BookmarkButton";
+import ShareButtons from "../../../../components/ShareButtons";
+import PropertyContactForm from "../../../../components/PropertyContactForm";
 import dbConnect from "../../../../config/database";
 import Property from "../../../../models/Property";
-import { notFound } from "next/navigation";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
 import { covertToSerializableObject } from "../../../../utils/convertToObject";
 
-export const dynamic = "force-dynamic"; // Ensure it's dynamically rendered
-
-const PropertyPage = async (props: any) => {
+const PropertyPage = async ({ params }) => {
   await dbConnect();
 
-  const params = await props.params;
-
   const propertyDoc = await Property.findById(params.id).lean();
-
   const property = covertToSerializableObject(propertyDoc);
 
   if (!property) {
@@ -42,8 +39,13 @@ const PropertyPage = async (props: any) => {
       </section>
       <section className="bg-blue-50">
         <div className="container m-auto py-10 px-6">
-          <div className="grid grid-cols-1 md:grid-cols-70/30 w-full gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-[3fr_1fr] w-full gap-6">
             <PropertyDetails property={property} />
+            <aside className="space-y-4">
+              <BookmarkButton property={property} />
+              <ShareButtons property={property} />
+              <PropertyContactForm property={property} />
+            </aside>
           </div>
         </div>
       </section>
