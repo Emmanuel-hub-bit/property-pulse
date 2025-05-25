@@ -7,8 +7,15 @@ import { covertToSerializableObject } from "../../../../utils/convertToObject";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 
 const SearchResultPage = async ({
-  searchParams: { location, propertyType },
+  searchParams,
+}: {
+  searchParams: Promise<{ location?: string; propertyType?: string }>;
 }) => {
+  const params = await searchParams; // <-- Await here first!
+
+  const location = params?.location || "";
+  const propertyType = params?.propertyType || "";
+
   await dbConnect();
 
   const locationPattern = new RegExp(location, "i");
@@ -23,15 +30,18 @@ const SearchResultPage = async ({
       { "location.zipcode": locationPattern },
     ],
   };
+
   if (propertyType && propertyType !== "All") {
     const typePattern = new RegExp(propertyType, "i");
     query.type = typePattern;
   }
+
   const propertiesQueryResults = await Property.find(query).lean();
   const properties = covertToSerializableObject(propertiesQueryResults);
+
   return (
     <>
-      <section className="bg-blue-700 py-5">
+      <section className="bg-blue-700 py-8">
         <div className="max-w-7xl mx-auto px-4 flex flex-col items-start sm:px-6 lg:px-8">
           <PropertySearchForm />
         </div>
