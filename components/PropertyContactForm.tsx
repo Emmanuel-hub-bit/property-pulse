@@ -1,7 +1,6 @@
 "use client";
 import { useEffect } from "react";
 import { useActionState } from "react";
-import { useFormStatus } from "react-dom";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import addMessage from "@/app/actions/addMeassage";
@@ -9,12 +8,32 @@ import { FaPaperPlane } from "react-icons/fa";
 
 const PropertyContactForm = ({ property }) => {
   const { data: session } = useSession();
+  // const [state, formAction] = useActionState(addMessage);
+  const [state, formAction] = useActionState(addMessage, {
+    submitted: false,
+    error: null,
+  });
+
+  useEffect(() => {
+    if (state.error) toast.error(state.error);
+    if (state.submitted) toast.success("Message sent successfuly");
+  }, [state]);
+
+  if (state.submitted) {
+    return <p className="text-green-500 mb-4">Message sent successfuly</p>;
+  }
 
   return (
     session && (
       <div className="bg-white p-6 rounded-lg shadow-md">
         <h3 className="text-xl font-bold mb-6">Contact Property Manager</h3>
-        <form>
+        <form action={formAction}>
+          <input
+            type="hidden"
+            id="receiver"
+            name="receiver"
+            defaultValue={property.owner}
+          />
           <input
             type="hidden"
             id="property"
@@ -71,15 +90,15 @@ const PropertyContactForm = ({ property }) => {
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="message"
+              htmlFor="body"
             >
               Message:
             </label>
             <textarea
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 h-44 focus:outline-none focus:shadow-outline"
-              id="message"
-              name="message"
-              placeholder="Enter your message"
+              id="body"
+              name="body"
+              placeholder="Enter your body"
             ></textarea>
           </div>
           <div>
