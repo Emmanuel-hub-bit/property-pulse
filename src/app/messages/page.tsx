@@ -1,6 +1,6 @@
 import dbConnect from "../../../config/database";
 import Message from "../../../models/Message";
-// import Property from "../../../models/Property";
+import "../../../models/Property";
 import { covertToSerializableObject } from "../../../utils/convertToObject";
 import { getSessionUser } from "../../../utils/getSessionUser";
 import { redirect } from "next/navigation";
