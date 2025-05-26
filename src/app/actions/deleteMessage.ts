@@ -1,5 +1,4 @@
 'use server';
-import dbConnect from "../../../config/database";
 import Message from "../../../models/Message";
 import { getSessionUser } from "../../../utils/getSessionUser";
 import { revalidatePath } from "next/cache";
